@@ -1,6 +1,13 @@
+import { questions } from "./assets/questions"
+
 function App() {
+
+  console.log(questions)
+  
   return (
-    <p>Quiz App</p>
+    <>
+      <p>Quiz App</p>
+    </>
   )
 }
 
