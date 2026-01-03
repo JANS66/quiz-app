@@ -1,5 +1,7 @@
 import { useState } from "react"
 import { questions } from "./assets/questions"
+import QuizScreen from "./components/QuizScreen"
+import ResultScreen from "./components/ResultScreen"
 
 function App() {
 
@@ -17,7 +19,7 @@ function App() {
 
   const handleSubmit = () => {
     if (selectedAnswer === currentQuestion.correctAnswer) setScore(previousScore => previousScore + 1)
-    
+
     if (currentQuestionIndex === questions.length - 1) {
       setIsFinished(true)
     } else {
@@ -35,10 +37,23 @@ function App() {
 
   return (
     <div>
-      {isFinished ? `You scored ${score} / ${questions.length}` : question}
-      {!isFinished && options}
-      {!isFinished && <button onClick={() => handleSubmit()} disabled={selectedAnswer === null}>Submit</button>}
-      {isFinished && <button onClick={() => handleRestart()}>Restart Quiz</button>}
+      {isFinished ? (
+        <ResultScreen
+          score={score}
+          total={questions.length}
+          onRestart={handleRestart}
+        />
+      ) : (
+        <QuizScreen
+          question={currentQuestion.question}
+          options={currentQuestion.options}
+          selectedAnswer={selectedAnswer}
+          onSelect={setSelectedAnswer}
+          onSubmit={handleSubmit}
+          current={currentQuestionIndex + 1}
+          total={questions.length}
+        />
+      )}
     </div>
   )
 }
