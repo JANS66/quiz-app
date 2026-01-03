@@ -27,11 +27,18 @@ function App() {
     setSelectedAnswer(null)
   }
 
+  const handleRestart = () => {
+    setCurrentQuestionIndex(0)
+    setScore(0)
+    setIsFinished(false)
+  }
+
   return (
     <div>
       {isFinished ? `You scored ${score} / ${questions.length}` : question}
       {!isFinished && options}
       {!isFinished && <button onClick={() => handleSubmit()} disabled={selectedAnswer === null}>Submit</button>}
+      {isFinished && <button onClick={() => handleRestart()}>Restart Quiz</button>}
     </div>
   )
 }
