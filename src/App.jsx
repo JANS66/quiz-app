@@ -16,16 +16,22 @@ function App() {
   const chooseAnswer = answer => setSelectedAnswer(answer)
 
   const handleSubmit = () => {
-    if (selectedAnswer === currentQuestion.correctAnswer) setScore(previousScore => ++previousScore)
-    setCurrentQuestionIndex(previousQuestionIndex => previousQuestionIndex < questions.length ? ++previousQuestionIndex : null)
+    if (selectedAnswer === currentQuestion.correctAnswer) setScore(previousScore => previousScore + 1)
+    
+    if (currentQuestionIndex === questions.length - 1) {
+      setIsFinished(true)
+    } else {
+      setCurrentQuestionIndex(previousIndex => previousIndex + 1)
+    }
+
     setSelectedAnswer(null)
   }
 
   return (
     <div>
-      {question}
-      {options}
-      <button onClick={() => handleSubmit()} disabled={selectedAnswer === null}>Submit</button>
+      {isFinished ? `You scored ${score} / ${questions.length}` : question}
+      {!isFinished && options}
+      {!isFinished && <button onClick={() => handleSubmit()} disabled={selectedAnswer === null}>Submit</button>}
     </div>
   )
 }
