@@ -1,21 +1,32 @@
 export default function QuizScreen({ question, options, selectedAnswer, onSelect, onSubmit, current, total }) {
     return (
-        <>
-            <p>(Question {current} of {total})</p>
-            <h2>{question}</h2>
+        <div className="quiz-container">
+            <p className="quiz-progress">
+                Question {current} of {total}
+            </p>
 
-            {options.map((option, index) => (
-                <button
-                    key={index}
-                    onClick={() => onSelect(option)}
-                >
-                    {option}
-                </button>
-            ))}
+            <h2 className="quiz-question">{question}</h2>
 
-            <button onClick={onSubmit} disabled={!selectedAnswer}>
+            <div className="quiz-options">
+                {options.map((option, index) => (
+                    <button
+                        key={index}
+                        className={`quiz-option ${selectedAnswer === option ? `selected` : ``
+                            }`}
+                        onClick={() => onSelect(option)}
+                    >
+                        {option}
+                    </button>
+                ))}
+            </div>
+
+            <button
+                className="quiz-submit"
+                onClick={onSubmit}
+                disabled={!selectedAnswer}
+            >
                 Submit
             </button>
-        </>
+        </div>
     )
 }

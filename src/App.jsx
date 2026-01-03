@@ -2,6 +2,7 @@ import { useState } from "react"
 import { questions } from "./assets/questions"
 import QuizScreen from "./components/QuizScreen"
 import ResultScreen from "./components/ResultScreen"
+import "./App.css"
 
 function App() {
 

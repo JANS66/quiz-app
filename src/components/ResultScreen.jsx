@@ -1,8 +1,13 @@
-export default function ResultScreen({score, total, onRestart}) {
+export default function ResultScreen({ score, total, onRestart }) {
     return (
-        <>
-            <h2>You scored {score} / {total}</h2>
-            <button onClick={onRestart}>Restart Quiz</button>
-        </>
+        <div className="result-container">
+            <h2 className="result-score">
+                You scored {score} / {total}
+            </h2>
+
+            <button className="quiz-submit" onClick={onRestart}>
+                Restart Quiz
+            </button>
+        </div>
     )
 }
